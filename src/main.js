@@ -4,6 +4,7 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const form = document.querySelector('.form');
+const input = document.querySelector('#search');
 const galleryGrid = document.querySelector('.images-section');
 
 form.addEventListener(submit, () => {});

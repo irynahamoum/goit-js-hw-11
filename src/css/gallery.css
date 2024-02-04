@@ -6,14 +6,14 @@
   margin-bottom: 25px;
 }
 
-.form > input {
+.form > #search {
   cursor: pointer;
   width: 272px;
   border-radius: 5px;
   margin-right: 8px;
   border: 1.5px solid rgb(166, 164, 164);
   padding: 8px 12px;
-  font-family: Montserrat;
+  font-family: Raleway;
   font-size: 16px;
   font-weight: 400;
   line-height: 1.5; /* 150% */
@@ -22,7 +22,7 @@
   transition: border-color 250ms linear;
 }
 
-.form > input:focus-visible {
+.form > #search:focus-visible {
   border-color: #4e75ff;
   outline: #4e75ff;
 }
@@ -36,7 +36,7 @@
   height: 40px;
   background: #4e75ff;
   color: white;
-  font-family: Montserrat;
+  font-family: Raleway;
   font-size: 16px;
   font-weight: 400;
   line-height: 1.5; /* 150% */
