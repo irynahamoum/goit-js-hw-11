@@ -72,12 +72,13 @@ function createMarkupByHits(hits) {
         comments,
         downloads,
       }) => {
-        return `<a href="${largeImageURL}">
-      <img src="${webformatURL}" alt="${tags}" class="gallery-card">
-      <p><b>Likes:</b> ${likes}</p>
-      <p><b>Views:</b> ${views}</p>
-      <p><b>Comments:</b> ${comments}}</p>
-      <p><b>Downloads:</b> ${downloads}</p>
+        return `<a href="${largeImageURL}" class="gallery-card">
+      <img src="${webformatURL}" alt="${tags}" >
+      <div class="img-details-box">
+      <p class="detail-item"><b>Likes:</b> ${likes}</p>
+      <p class="detail-item"><b>Views:</b> ${views}</p>
+      <p class="detail-item"><b>Comments:</b> ${comments}}</p>
+      <p class="detail-item"><b>Downloads:</b> ${downloads}</p></div>
       </a>`;
       }
     )
