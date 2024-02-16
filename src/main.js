@@ -35,7 +35,7 @@ function handleSubmit(event) {
   getImagesByInputValue(inputValue)
     .then(data => {
       if (data?.hits?.length) {
-        // hideLoader();
+        hideLoader();
         createMarkupByHits(data.hits);
         return;
       }
