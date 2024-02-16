@@ -28,13 +28,14 @@ function handleSubmit(event) {
       message: 'Search field is empty',
       position: 'topRight',
     });
+    hideLoader();
     return;
   }
 
   getImagesByInputValue(inputValue)
     .then(data => {
       if (data?.hits?.length) {
-        hideLoader();
+        // hideLoader();
         createMarkupByHits(data.hits);
         return;
       }
@@ -48,6 +49,9 @@ function handleSubmit(event) {
           typeof error === 'string' ? error : 'Something went wrong, sorry!',
         position: 'topRight',
       });
+    })
+    .finally(() => {
+      hideLoader();
     });
 
   event.target.reset();
