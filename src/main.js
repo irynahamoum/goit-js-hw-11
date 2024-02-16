@@ -11,17 +11,19 @@ let gallery = new SimpleLightbox('.gallery-grid a', {
   captionsData: 'alt',
 });
 
-const BASE_URL = 'https://pixabay.com/api/';
-
 form.addEventListener('submit', handleSubmit);
 
 function handleSubmit(event) {
   event.preventDefault();
 
+  galleryGrid.innerHTML = '';
+
+  showLoader();
+
   const inputValue = event.target.elements.query.value.trim();
 
   if (!inputValue) {
-    galleryGrid.innerHTML = '';
+    // galleryGrid.innerHTML = '';
     iziToast.error({
       message: 'Search field is empty',
       position: 'topRight',
@@ -29,12 +31,10 @@ function handleSubmit(event) {
     return;
   }
 
-  loader.style.display = 'inline-block';
-
   getImagesByInputValue(inputValue)
     .then(data => {
-      if (data?.hits?.length > 0) {
-        loader.style.display = 'none';
+      if (data?.hits?.length) {
+        hideLoader();
         createMarkupByHits(data.hits);
         return;
       }
@@ -53,7 +53,17 @@ function handleSubmit(event) {
   event.target.reset();
 }
 
+function showLoader() {
+  loader.style.display = 'inline-block';
+}
+
+function hideLoader() {
+  loader.style.display = 'none';
+}
+
 function getImagesByInputValue(q) {
+  const BASE_URL = 'https://pixabay.com/api/';
+
   const paramsStrQuery = new URLSearchParams({
     key: '42157668-d969611c6fdd34526589fe987',
     q,
@@ -64,8 +74,13 @@ function getImagesByInputValue(q) {
 
   const PARAMS = `?${paramsStrQuery}`;
   const url = BASE_URL + PARAMS;
-  loader.style.display = 'inline-block';
-  return fetch(url).then(response => response.json());
+  showLoader();
+  return fetch(url).then(response => {
+    if (!response.ok) {
+      throw new Error(response.status);
+    }
+    return response.json();
+  });
 }
 
 function createMarkupByHits(hits) {
